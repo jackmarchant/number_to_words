@@ -4,16 +4,12 @@ defmodule ElixirNumToWords do
   """
 
   @units ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-  @tens ["ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+  @tens ["ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 
-  def num_to_words(num) when num <= 9 do
-    Enum.at(@units, num - 1)
-  end
-
+  def num_to_words(num) when num <= 9, do: get_at_index(@units, num)
   def num_to_words(num) when num > 9 do
     tens = @tens |> get_at_index(div(num, 10))
     units = num |> get_remainder |> maybe_get_units
-
     print_word(tens, units)
   end
 
